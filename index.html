@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anuj & Harshita — Wedding Celebration</title>
+  <style>
+    :root {
+      --bg-cream: #fbf7f0;
+      --card-bg: #fffdf9;
+      --maroon: #7a1c1c;
+      --maroon-dark: #541010;
+      --gold: #c59b48;
+      --gold-light: #e5cfa0;
+      --text-dark: #2c1e16;
+      --text-muted: #6b574b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Tap to Open Overlay */
+    #cover-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #8c2222 0%, #4d0e0e 100%);
+      color: #fff8eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 9999;
+      padding: 2rem;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #cover-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cover-border {
+      border: 1.5px solid var(--gold);
+      padding: 3rem 2rem;
+      max-width: 440px;
+      width: 100%;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.18);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .mantra {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .cover-names {
+      font-family: "Brush Script MT", "Snell Roundhand", Georgia, cursive, serif;
+      font-style: italic;
+      font-size: 3.4rem;
+      color: #ffffff;
+      line-height: 1.2;
+      margin: 0.5rem 0;
+    }
+
+    .cover-sub {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 2rem;
+    }
+
+    .open-btn {
+      background: linear-gradient(135deg, #d8b263, #b58932);
+      color: #2b0909;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.04);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 1.5rem 1.2rem 4rem;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--gold-light);
+      border-radius: 16px;
+      padding: 2.8rem 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(122, 28, 28, 0.06);
+      position: relative;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(197, 155, 72, 0.35);
+      border-radius: 11px;
+      pointer-events: none;
+    }
+
+    .ganesh-header {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      color: var(--maroon);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .family-host {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--maroon);
+      text-transform: uppercase;
+    }
+
+    .invite-line {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .couple-hero {
+      font-family: "Brush Script MT", "Snell Roundhand", Georgia, cursive, serif;
+      font-style: italic;
+      font-size: 3.8rem;
+      color: var(--maroon);
+      line-height: 1.15;
+      margin: 0.5rem 0;
+    }
+
+    .amp {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--gold);
+      display: block;
+      margin: -0.2rem 0;
+    }
+
+    .date-pill {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.8rem;
+      border-top: 1.5px solid var(--gold);
+      border-bottom: 1.5px solid var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--maroon-dark);
+    }
+
+    /* Families Section */
+    .section-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      color: var(--maroon);
+      margin-bottom: 1.5rem;
+    }
+
+    .family-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 600px) {
+      .family-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .person-box {
+      padding: 1.2rem;
+      background: #faf4ea;
+      border-radius: 12px;
+      border: 1px solid rgba(197, 155, 72, 0.3);
+    }
+
+    .person-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--maroon);
+    }
+
+    .parent-details {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Story */
+    .story-text {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.18rem;
+      color: var(--text-dark);
+      max-width: 580px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* Countdown */
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .count-box {
+      background: var(--maroon);
+      color: #fff;
+      min-width: 74px;
+      padding: 0.9rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+    }
+
+    .count-num {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      display: block;
+      line-height: 1;
+    }
+
+    .count-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* Events */
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      text-align: left;
+    }
+
+    @media (min-width: 600px) {
+      .events-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .event-card {
+      background: #faf4ea;
+      border-left: 4px solid var(--maroon);
+      padding: 1.3rem 1.4rem;
+      border-radius: 10px;
+    }
+
+    .event-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--maroon);
+      margin-bottom: 0.3rem;
+    }
+
+    .event-meta {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .event-venue-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .btn-outline {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.65rem 1.5rem;
+      border: 1.5px solid var(--maroon);
+      color: var(--maroon);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      background: var(--maroon);
+      color: #fff;
+    }
+
+    .compliments-list {
+      list-style: none;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tap to Open Cover -->
+  <div id="cover-overlay">
+    <div class="cover-border">
+      <div class="mantra">॥ श्री गणेशाय नमः ॥</div>
+      <div class="cover-sub">Wedding Invitation</div>
+      <div class="cover-names">Anuj &amp; Harshita</div>
+      <p style="font-size: 0.9rem; color: #f3e5c8; margin-bottom: 2rem;">
+        Wednesday, 9th December 2026 • Lalitpur
+      </p>
+      <button class="open-btn" onclick="openInvite()">Tap to Open</button>
+    </div>
+  </div>
+
+  <!-- Main Invitation Content -->
+  <main class="container">
+
+    <!-- Hero Card -->
+    <section class="section-card">
+      <div class="ganesh-header">॥ श्री गणेशाय नमः ॥</div>
+      <div class="family-host">Purohit Parivaar</div>
+      <p class="invite-line">
+        Warmly welcomes you to the auspicious wedding ceremony of
+      </p>
+
+      <h1 class="couple-hero">
+        Anuj
+        <span class="amp">&amp;</span>
+        Harshita
+      </h1>
+
+      <div class="date-pill">09 • 12 • 2026</div>
+      <p style="margin-top: 1rem; font-size: 0.92rem; color: var(--text-muted);">
+        Wednesday, 9th December 2026
+      </p>
+    </section>
+
+    <!-- Couple & Family Blessings -->
+    <section class="section-card">
+      <div class="section-eyebrow">With the Blessings of Our Families</div>
+      <h2 class="section-title">The Bride &amp; Groom</h2>
+      <div class="family-grid">
+        <div class="person-box">
+          <div class="person-name">Anuj Purohit</div>
+          <div class="parent-details">
+            Son of<br />
+            <em>(Add Groom's Parents' Names)</em>
+          </div>
+        </div>
+        <div class="person-box">
+          <div class="person-name">Harshita</div>
+          <div class="parent-details">
+            Daughter of<br />
+            <em>(Add Bride's Parents' Names)</em>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="section-card">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">Two Hearts, One Beautiful Beginning</h2>
+      <p class="story-text">
+        “Two paths brought together by destiny and the blessings of our families. What started with warm conversations soon turned into effortless laughter and a lifelong bond. As we step into this new chapter together, your presence and blessings will make our celebration truly complete.”
+      </p>
+    </section>
+
+    <!-- Countdown & Calendar -->
+    <section class="section-card">
+      <div class="section-eyebrow">Counting the Days</div>
+      <h2 class="section-title">Until We Say I Do</h2>
+      <div class="countdown-grid" id="countdown">
+        <div class="count-box"><span class="count-num" id="days">--</span><span class="count-label">Days</span></div>
+        <div class="count-box"><span class="count-num" id="hours">--</span><span class="count-label">Hours</span></div>
+        <div class="count-box"><span class="count-num" id="minutes">--</span><span class="count-label">Minutes</span></div>
+        <div class="count-box"><span class="count-num" id="seconds">--</span><span class="count-label">Seconds</span></div>
+      </div>
+      <a
+        class="btn-outline"
+        target="_blank"
+        rel="noopener"
+        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Anuj+%26+Harshita&dates=20261209T033000Z/20261209T183000Z&details=Join+us+to+celebrate+the+wedding+of+Anuj+and+Harshita!&location=Hotel+Brijwasi+%26+Resort,+Jhansi+Road,+Lalitpur,+Uttar+Pradesh"
+      >
+        + Add to Google Calendar
+      </a>
+    </section>
+
+    <!-- Events Schedule -->
+    <section class="section-card">
+      <div class="section-eyebrow">Wednesday, 9th December 2026</div>
+      <h2 class="section-title">The Celebrations</h2>
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-title">Bride Blessing &amp; Faldaan</div>
+          <div class="event-meta">09:00 AM onwards</div>
+          <div class="event-venue-tag">Hotel Brijwasi &amp; Resort, Lalitpur</div>
+        </div>
+        <div class="event-card">
+          <div class="event-title">Ring Ceremony &amp; Lunch</div>
+          <div class="event-meta">11:00 AM onwards</div>
+          <div class="event-venue-tag">Hotel Brijwasi &amp; Resort, Lalitpur</div>
+        </div>
+        <div class="event-card">
+          <div class="event-title">Wedding Carnival</div>
+          <div class="event-meta">Post Lunch</div>
+          <div class="event-venue-tag">Hotel Brijwasi &amp; Resort, Lalitpur</div>
+        </div>
+        <div class="event-card">
+          <div class="event-title">Baraat &amp; Pheras</div>
+          <div class="event-meta">07:00 PM onwards</div>
+          <div class="event-venue-tag">Hotel Brijwasi &amp; Resort, Lalitpur</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Venue -->
+    <section class="section-card">
+      <div class="section-eyebrow">Event Venue</div>
+      <h2 class="section-title">Hotel Brijwasi &amp; Resort</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Jhansi Road, Lalitpur, Uttar Pradesh
+      </p>
+      <a
+        class="btn-outline"
+        target="_blank"
+        rel="noopener"
+        href="https://www.google.com/maps/search/?api=1&query=Hotel+Brijwasi+%26+Resort+Jhansi+Road+Lalitpur+Uttar+Pradesh"
+      >
+        Open in Google Maps
+      </a>
+    </section>
+
+    <!-- Best Compliments -->
+    <section class="section-card">
+      <div class="section-eyebrow">Warm Regards</div>
+      <h2 class="section-title">With Best Compliments From</h2>
+      <ul class="compliments-list">
+        <li>Mr. Raj Narayan</li>
+        <li>Mr. Krishna Narayan</li>
+        <li>Mr. Shiv Narayan</li>
+        <li>Mr. Laxmi Narayan</li>
+      </ul>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        We look forward to celebrating this joyous occasion with you!
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    function openInvite() {
+      document.getElementById('cover-overlay').classList.add('hidden');
+    }
+
+    // Countdown to Dec 9, 2026 09:00 AM IST
+    const weddingDate = new Date('2026-12-09T09:00:00+05:30').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance <= 0) {
+        document.getElementById('countdown').innerHTML =
+          '<p style="font-family: Georgia, serif; font-size: 1.5rem; color: #7a1c1c;">Today is the Big Day!</p>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
